@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ehhm.TV 〽️ | Version Selector</title>
+  <meta name="description" content="Wechsle zwischen verschiedenen Versionen der Ehhm.TV Website." />
+  <meta name="theme-color" content="#9146FF" />
+
+  <style>
+    :root{
+      --bg:#0e0e10;
+      --panel:#18181b;
+      --text:#efeff1;
+      --muted:#adadb8;
+      --accent:#9146FF;
+      --accent2:#a970ff;
+      --radius:18px;
+      --shadow:0 18px 50px rgba(0,0,0,.55);
+      --max:1100px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1000px 500px at 20% -10%, rgba(145,70,255,.22), transparent 55%),
+        radial-gradient(800px 400px at 90% 10%, rgba(169,112,255,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg), #0b0b0d);
+    }
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:48px 20px 80px;
+      display:grid;
+      gap:32px;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      gap:16px;
+    }
+
+    .logo{
+      width:56px;
+      height:56px;
+      border-radius:18px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display:grid;
+      place-items:center;
+      font-size:24px;
+      font-weight:900;
+      box-shadow:0 16px 36px rgba(145,70,255,.35);
+    }
+
+    h1{
+      margin:0;
+      font-size:34px;
+      letter-spacing:-.6px;
+    }
+
+    .sub{
+      color:var(--muted);
+      max-width:60ch;
+      line-height:1.6;
+      margin-top:8px;
+    }
+
+    .versions{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:20px;
+      margin-top:20px;
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(24,24,27,.9), rgba(31,31,35,.75));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      transition:.2s ease;
+    }
+
+    .card:hover{
+      transform:translateY(-3px);
+      border-color: rgba(145,70,255,.45);
+    }
+
+    .badge{
+      align-self:flex-start;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(145,70,255,.18);
+      border:1px solid rgba(145,70,255,.35);
+    }
+
+    .card h2{
+      margin:0;
+      font-size:20px;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.5;
+      font-size:14px;
+    }
+
+    .actions{
+      margin-top:auto;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      flex:1;
+      text-align:center;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(31,31,35,.7);
+      color:var(--text);
+      font-size:14px;
+      cursor:pointer;
+      transition:.18s ease;
+      text-decoration:none;
+    }
+
+    .btn.primary{
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow:0 14px 30px rgba(145,70,255,.35);
+    }
+
+    .btn:hover{filter:brightness(1.05)}
+
+    footer{
+      margin-top:40px;
+      text-align:center;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    footer span{color:var(--text)}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="logo">〽️</div>
+      <div>
+        <h1>Ehhm.TV · Version Selector</h1>
+        <p class="sub">
+          Wähle zwischen mehreren Versionen deiner Website. Ideal für Tests, Feedback
+          oder verschiedene Entwicklungsstufen (Classic → Premium → Chaos 😏).
+        </p>
+      </div>
+    </header>
+
+    <section class="versions">
+      <div class="card">
+        <span class="badge">Stabil</span>
+        <h2>Version 1</h2>
+        <p>
+          Solide Basis-Version. Clean, übersichtlich und perfekt als Fallback
+          oder Referenz.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="./V.1/index.html">Öffnen</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="badge">Aktiv</span>
+        <h2>Version 2</h2>
+        <p>
+          Weiterentwickelte Version mit Twitch-Vibe, Panels
+          und verbesserter Struktur.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="./V.2/index.html">Öffnen</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="badge">Experimentell</span>
+        <h2>Version 3</h2>
+        <p>
+          Spielwiese 🔥 Neue Features, Layout-Experimente,
+          Chaos & Kreativität pur.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="./V.3/index.html">Öffnen</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> <span>Ehhm.TV 〽️</span></div>
+      <div>GitHub Pages · Version Hub</div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
