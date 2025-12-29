@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Euer Baron 〽️ | UNISKILLZ – Twitch-Style Hub</title>
+  <meta name="description" content="Gaming, Community, Abenteuer & Studio-Traum – alles an einem Ort. Offizielle Links, Kontakt und Infos." />
+  <meta name="theme-color" content="#9146FF" />
+  <style>
+    /* ===== Twitch-inspired Premium Style (no external libs) ===== */
+    :root{
+      --bg:#0e0e10;
+      --bg2:#14141a;
+      --panel:#18181b;
+      --panel2:#1f1f23;
+      --text:#efeff1;
+      --muted:#adadb8;
+      --line:#2a2a33;
+      --accent:#9146FF; /* Twitch purple */
+      --accent2:#a970ff;
+      --good:#00f593;
+      --warn:#ffd37a;
+      --shadow: 0 14px 40px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1120px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(145,70,255,.22), transparent 55%),
+        radial-gradient(900px 500px at 90% 0%, rgba(0,245,147,.10), transparent 55%),
+        radial-gradient(800px 500px at 40% 120%, rgba(169,112,255,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg) 0%, #0b0b0d 100%);
+      overflow-x:hidden;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 64px}
+
+    /* Top bar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(14,14,16,.65);
+      border-bottom: 1px solid rgba(42,42,51,.55);
+    }
+    .topbar .inner{max-width:var(--max); margin:0 auto; padding:10px 18px; display:flex; align-items:center; gap:12px}
+    .brand{
+      display:flex; align-items:center; gap:10px; min-width: 230px;
+    }
+    .logo{
+      width:40px; height:40px; border-radius:14px;
+      background: linear-gradient(135deg, rgba(145,70,255,.95), rgba(169,112,255,.7));
+      display:grid; place-items:center;
+      box-shadow: 0 10px 30px rgba(145,70,255,.28);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .logo span{font-weight:900}
+    .brand .name{line-height:1.05}
+    .brand .name b{display:block; font-size:14px; letter-spacing:.35px}
+    .brand .name small{color:var(--muted); font-size:12px}
+
+    nav{flex:1; display:flex; gap:8px; justify-content:center; flex-wrap:wrap}
+    .navbtn{
+      padding:9px 10px;
+      border-radius: 14px;
+      font-size:13px;
+      color:var(--muted);
+      border:1px solid transparent;
+      transition:.18s ease;
+    }
+    .navbtn:hover{color:var(--text); border-color: rgba(145,70,255,.35); background: rgba(145,70,255,.12)}
+
+    .actions{display:flex; gap:10px; align-items:center}
+    .btn{
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(31,31,35,.7);
+      color:var(--text);
+      font-size:13px;
+      cursor:pointer;
+      transition: .18s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,.18);
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(145,70,255,.35)}
+    .btn.primary{
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-color: rgba(255,255,255,.12);
+      box-shadow: 0 16px 34px rgba(145,70,255,.28);
+    }
+    .btn.primary:hover{filter:saturate(1.05) brightness(1.03)}
+
+    /* Hero */
+    .hero{padding:28px 0 10px}
+    .heroGrid{display:grid; grid-template-columns: 1.2fr .8fr; gap:16px; align-items:stretch}
+    .card{
+      background: linear-gradient(180deg, rgba(24,24,27,.85), rgba(31,31,35,.72));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(700px 240px at 20% 0%, rgba(145,70,255,.25), transparent 60%),
+                  radial-gradient(700px 240px at 80% 10%, rgba(0,245,147,.12), transparent 60%);
+      pointer-events:none;
+      z-index:0;
+    }
+    .card > *{position:relative; z-index:1}
+
+    .heroMain{padding:22px 22px 18px}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:7px 10px;
+      border-radius: 999px;
+      background: rgba(145,70,255,.16);
+      border:1px solid rgba(145,70,255,.30);
+      color: var(--text);
+      font-size:12px;
+    }
+    .badge .dot{width:8px; height:8px; border-radius:999px; background: var(--good); box-shadow:0 0 0 5px rgba(0,245,147,.12)}
+
+    h1{margin:12px 0 8px; font-size:34px; letter-spacing:-.7px; line-height:1.08}
+    .sub{color:var(--muted); font-size:14px; line-height:1.55; max-width: 62ch}
+
+    .quick{
+      margin-top:16px;
+      display:flex; flex-wrap:wrap; gap:10px;
+    }
+    .pill{
+      display:flex; align-items:center; gap:10px;
+      padding:10px 12px;
+      border-radius: 16px;
+      background: rgba(24,24,27,.72);
+      border:1px solid rgba(255,255,255,.08);
+      min-width: 220px;
+      flex: 1;
+    }
+    .pill b{font-size:13px}
+    .pill small{display:block; font-size:12px; color:var(--muted); margin-top:1px}
+
+    .heroSide{padding:18px}
+    .panelTitle{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px}
+    .panelTitle h2{margin:0; font-size:14px; letter-spacing:.4px; text-transform:uppercase; color:var(--muted)}
+    .panelTitle .chip{font-size:12px; color:var(--muted); border:1px solid rgba(255,255,255,.10); padding:6px 10px; border-radius:999px; background: rgba(0,0,0,.15)}
+
+    .list{display:grid; gap:10px}
+    .linkRow{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:12px 12px;
+      border-radius: 16px;
+      background: rgba(24,24,27,.68);
+      border:1px solid rgba(255,255,255,.08);
+      transition:.18s ease;
+    }
+    .linkRow:hover{border-color: rgba(145,70,255,.35); transform: translateY(-1px)}
+    .linkRow .left{display:flex; align-items:center; gap:10px}
+    .icon{
+      width:34px; height:34px; border-radius: 14px;
+      display:grid; place-items:center;
+      background: rgba(145,70,255,.12);
+      border:1px solid rgba(145,70,255,.25);
+      color: var(--text);
+      font-weight:700;
+    }
+    .linkRow b{font-size:13px}
+    .linkRow small{display:block; font-size:12px; color:var(--muted)}
+    .chev{color:var(--muted)}
+
+    /* Sections */
+    .grid2{display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-top:16px}
+    .section{padding:18px}
+    .section h3{margin:0 0 10px; font-size:16px}
+    .section p{margin:0; color:var(--muted); line-height:1.6; font-size:14px}
+
+    .divider{
+      margin:18px 0 0;
+      border-top:1px solid rgba(42,42,51,.70);
+    }
+
+    /* Panels */
+    .panels{margin-top:16px; display:grid; grid-template-columns: 1fr 1fr 1fr; gap:16px}
+    .panel{padding:16px}
+    .kicker{font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.5px}
+    .panel h4{margin:6px 0 8px; font-size:15px}
+    .panel ul{margin:0; padding:0 0 0 16px; color:var(--muted); font-size:14px; line-height:1.6}
+    .panel li{margin:6px 0}
+
+    /* Wishlist */
+    .table{
+      margin-top:10px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      overflow:hidden;
+    }
+    .row{
+      display:grid;
+      grid-template-columns: 1.2fr .6fr .7fr;
+      gap:10px;
+      padding:12px 12px;
+      background: rgba(24,24,27,.62);
+      border-top:1px solid rgba(42,42,51,.55);
+      align-items:center;
+    }
+    .row:first-child{border-top:none; background: rgba(31,31,35,.72)}
+    .row b{font-size:13px}
+    .row span{font-size:12px; color:var(--muted)}
+    .tag{
+      justify-self:start;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+      color: var(--muted);
+    }
+    .tag.accent{border-color: rgba(145,70,255,.35); color: rgba(233,224,255,.95); background: rgba(145,70,255,.12)}
+
+    /* Footer */
+    footer{margin-top:18px; padding:18px; color:var(--muted); font-size:12px; text-align:center}
+    .footlinks{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:8px}
+    .footlinks a{padding:8px 10px; border-radius: 12px; border:1px solid rgba(255,255,255,.08); background: rgba(31,31,35,.55)}
+    .footlinks a:hover{border-color: rgba(145,70,255,.35)}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .heroGrid{grid-template-columns:1fr}
+      .panels{grid-template-columns:1fr}
+      .grid2{grid-template-columns:1fr}
+      nav{display:none}
+      .brand{min-width:auto}
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto !important; transition:none !important}
+    }
+  </style>
+</head>
+<body>
+  <!-- Sticky topbar -->
+  <header class="topbar">
+    <div class="inner">
+      <a class="brand" href="#top" aria-label="Startseite">
+        <div class="logo" aria-hidden="true"><span>〽️</span></div>
+        <div class="name">
+          <b>Euer Baron · UNISKILLZ</b>
+          <small>Gaming · Community · Studio-Traum</small>
+        </div>
+      </a>
+
+      <nav aria-label="Navigation">
+        <a class="navbtn" href="#about">Über mich</a>
+        <a class="navbtn" href="#community">Community</a>
+        <a class="navbtn" href="#support">Support</a>
+        <a class="navbtn" href="#games">Games</a>
+        <a class="navbtn" href="#wishlist">Studio-Liste</a>
+        <a class="navbtn" href="#contact">Kontakt</a>
+      </nav>
+
+      <div class="actions">
+        <a class="btn" href="#support">💜 Unterstützen</a>
+        <a class="btn primary" href="#wishlist">⚙️ UpgradeTheWholeSystem</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="heroGrid">
+        <div class="card heroMain">
+          <div class="badge"><span class="dot" aria-hidden="true"></span> Live-Vibe, aber als Website – Twitch-Style</div>
+          <h1>Komm mit auf ein Abenteuer 🚀🌕🏔️</h1>
+          <p class="sub">
+            Rundum Gaming: faszinierende Welten 🗺️🧭, harte Gegner 👹 und Herausforderungen ⚔️ –
+            inklusive meiner geballten Ladung an Reaktionen 🤩😮😨 (Frust, Freude, Eskalation… alles dabei 😅).
+            <br/><br/>
+            <b>✴️ Das Wichtigste:</b> Habt Spaß ❗ und genießt den Stream ❗
+          </p>
+
+          <div class="quick">
+            <div class="pill">
+              <div>💬</div>
+              <div>
+                <b>Chat = Herzstück</b>
+                <small>Dein Zutun macht den Stream lebendig 🙌</small>
+              </div>
+            </div>
+            <div class="pill">
+              <div>🎙️</div>
+              <div>
+                <b>Studio-Traum</b>
+                <small>Setup upgraden & kreativ eskalieren 🎛️</small>
+              </div>
+            </div>
+            <div class="pill">
+              <div>🌊</div>
+              <div>
+                <b>Bodenseeregion</b>
+                <small>Baden-Württemberg · Marcel (24)</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="card heroSide">
+          <div class="panelTitle">
+            <h2>Offizielle Links</h2>
+            <span class="chip">Alles an einem Ort</span>
+          </div>
+          <div class="list">
+            <a class="linkRow" href="https://ehhmmy.wixsite.com/baron-m" target="_blank" rel="noopener">
+              <div class="left">
+                <div class="icon">🌐</div>
+                <div>
+                  <b>Mehr über mich / Support</b>
+                  <small>Wix-Seite öffnen</small>
+                </div>
+              </div>
+              <div class="chev">›</div>
+            </a>
+
+            <!-- Ersetze die # Links mit deinen echten Profilen -->
+            <a class="linkRow" href="https://www.twitch.tv/ehhmtv" target="_blank" rel="noopener">
+              <div class="left">
+                <div class="icon">🎮</div>
+                <div>
+                  <b>Twitch</b>
+                  <small>Profil / Channel</small>
+                </div>
+              </div>
+              <div class="chev">›</div>
+            </a>
+
+            <a class="linkRow" href="https://www.instagram.com/ehhm.s" target="_blank" rel="noopener">
+              <div class="left">
+                <div class="icon">📸</div>
+                <div>
+                  <b>Instagram</b>
+                  <small>DMs (wenn ich’s sehe 😄)</small>
+                </div>
+              </div>
+              <div class="chev">›</div>
+            </a>
+
+            <a class="linkRow" href="https://www.youtube.com/@Ehhm.s-Twitch-VODs" target="_blank" rel="noopener">
+              <div class="left">
+                <div class="icon">▶️</div>
+                <div>
+                  <b>YouTube</b>
+                  <small>VODs / Highlights</small>
+                </div>
+              </div>
+              <div class="chev">›</div>
+            </a>
+
+            <a class="linkRow" href="#contact">
+              <div class="left">
+                <div class="icon">✉️</div>
+                <div>
+                  <b>Mail me</b>
+                  <small>official.uniskillz@gmail.com</small>
+                </div>
+              </div>
+              <div class="chev">›</div>
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ABOUT + COMMUNITY -->
+    <section class="grid2">
+      <div id="about" class="card section">
+        <h3>Über mich 👋</h3>
+        <p>
+          Ich heiße <b>Marcel</b>, bin <b>24</b> und komme aus <b>Baden-Württemberg</b> (Bodenseeregion 🌊🌅).
+          Gaming ist seit klein 👦 ein Teil meines Lebens – von Gameboy/DS bis PC & Konsole.
+          Ich liebe es, in Storylines zu versinken 📖 und gemeinsam mit euch Welten zu entdecken 🧭.
+        </p>
+        <div class="divider"></div>
+        <p style="margin-top:12px">
+          Wenn ich mal kurzfristig den Stream beende oder unregelmäßig online bin:
+          Ich bin auch nur ein Mensch 😅 – Reallife, Ruhe, Laune, Gesundheit.
+          Alles hier kommt aus freiem Herzen 🤍.
+        </p>
+      </div>
+
+      <div id="community" class="card section">
+        <h3>Community & Chat 💬</h3>
+        <p>
+          ✴️ <b>Das Wichtigste:</b> Habt Spaß und genießt den Stream!
+          Unterhaltet euch gern mit mir und den anderen Zuschauern 👀👥 –
+          euer Zutun macht alles erst lebendig 🦘🐇.
+        </p>
+        <div class="divider"></div>
+        <p style="margin-top:12px">
+          Ich lade dich ein – ja <b>DICH</b> 🖥️💻📱 – dieses Erlebnis mit mir zu teilen 😄
+          und Teil der Community zu werden/zu bleiben 🤗🙏.
+        </p>
+      </div>
+    </section>
+
+    <!-- PANELS -->
+    <section class="panels">
+      <div id="support" class="card panel">
+        <div class="kicker">Support</div>
+        <h4>Unterstützung 🎁</h4>
+        <ul>
+          <li>Spenden helfen mir, Setup & Qualität zu verbessern 🎙️🎚️🎛️</li>
+          <li>Wenn du spendest, schreib gern den <b>Artikelnamen</b> dazu – dann geht’s gezielt dafür drauf ✅</li>
+          <li>Danke an alle, die ernsthaft supporten 😘 (Keks 🍪 / Kaffee ☕ / Pizza 🍕 inklusive 😄)</li>
+        </ul>
+        <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+          <a class="btn primary" href="#wishlist">Zur Studio-Liste</a>
+          <a class="btn" href="#contact">Fragen? Schreib mir</a>
+        </div>
+      </div>
+
+      <div id="games" class="card panel">
+        <div class="kicker">Games</div>
+        <h4>Was du hier erwarten kannst 🎮</h4>
+        <ul>
+          <li>Aktuell viel <b>World of Warcraft</b> (Classic hat die Lust wieder geweckt 😍)</li>
+          <li>MMORPG-Liebe: WoW, Guild Wars 2, Black Desert u.Ä. 👥</li>
+          <li>Breites Spektrum: von Minecraft bis Story-Kracher 📖✨</li>
+        </ul>
+        <div style="margin-top:12px" class="tag accent">#GameOn 🌐🖥️🖱️🔊</div>
+      </div>
+
+      <div class="card panel">
+        <div class="kicker">Konsole</div>
+        <h4>Horror / Action / Racing 📺</h4>
+        <ul>
+          <li>The Last of Us 🐾🐕</li>
+          <li>The Evil Within 🔪💉🩸</li>
+          <li>Layers of Fear 🎨</li>
+          <li>Need for Speed 🏎️🚨</li>
+          <li>Online PvP: Rocket League ⚽🚗💥</li>
+        </ul>
+        <div style="margin-top:12px" class="tag">#Stream & #Play 📶🎦⏺️</div>
+      </div>
+    </section>
+
+    <!-- WISHLIST / STUDIO -->
+    <section id="wishlist" class="card section" style="margin-top:16px">
+      <h3>〽️ Studio-Plan: UpgradeTheWholeSystem ⚙️🔧🔩</h3>
+      <p>
+        Ich habe einen Ort gefunden, an dem ich mir vermutlich ein Studio einrichten kann.
+        Hier ist eine Liste mit Dingen, die ich dafür plane. Wenn du mich stärker unterstützen möchtest,
+        kannst du bei einer Donation den <b>Artikelnamen</b> dazuschreiben – dann wird genau dafür gespart/gekauft ❤️
+      </p>
+
+      <div class="table" aria-label="Studio-Wunschliste">
+        <div class="row" style="font-weight:700">
+          <div>Artikel</div>
+          <div>Priorität</div>
+          <div>Notiz</div>
+        </div>
+
+        <!-- Du kannst diese Liste beliebig erweitern/ändern -->
+        <div class="row">
+          <div><b>Mikrofon + Interface</b><br><span>z.B. XLR Mic, Audio Interface</span></div>
+          <div><span class="tag accent">Hoch</span></div>
+          <div><span>Grundlage für Pro-Audio 🎙️</span></div>
+        </div>
+        <div class="row">
+          <div><b>Beleuchtung (Key/Fill/RGB)</b><br><span>Softbox / LED Panels</span></div>
+          <div><span class="tag accent">Hoch</span></div>
+          <div><span>Bildqualität & Stimmung ✨</span></div>
+        </div>
+        <div class="row">
+          <div><b>Kamera / Capture</b><br><span>Webcam / DSLR / Capture Card</span></div>
+          <div><span class="tag">Mittel</span></div>
+          <div><span>Facecam/Content 📸</span></div>
+        </div>
+        <div class="row">
+          <div><b>Stream Deck / Controller</b><br><span>Hotkeys & Szenen</span></div>
+          <div><span class="tag">Mittel</span></div>
+          <div><span>Workflow & Effekte 🎛️</span></div>
+        </div>
+        <div class="row">
+          <div><b>Akustik (Panels/Absorber)</b><br><span>Echo reduzieren</span></div>
+          <div><span class="tag">Mittel</span></div>
+          <div><span>Clean Sound 🔊</span></div>
+        </div>
+        <div class="row">
+          <div><b>Musik/Produktion</b><br><span>MIDI Keyboard, Plugins</span></div>
+          <div><span class="tag">Nice-to-have</span></div>
+          <div><span>Kreativität täglich ausleben 🎹🎶</span></div>
+        </div>
+      </div>
+
+      <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+        <button class="btn" id="copyWishlist">📋 Artikelnamen kopieren</button>
+        <a class="btn primary" href="#contact">✉️ Kontakt / Fragen</a>
+      </div>
+      <p style="margin-top:12px">
+        Küsse gehen raus an alle, die mich wirklich ernsthaft unterstützen 😘
+        Das ist einer meiner größten Träume: das Ganze professionell machen und täglich kreativ sein 🎨🎙️🎚️🎛️🎞️✂️📸🎹🎼📀🔊🎶
+      </p>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="grid2">
+      <div class="card section">
+        <h3>Kontakt 📬</h3>
+        <p>
+          Rundum Gaming / Feedback / Fragen:
+          <br />
+          <a class="btn primary" style="display:inline-block; margin-top:10px" href="mailto:official.uniskillz@gmail.com">Mail an official.uniskillz@gmail.com</a>
+          <button class="btn" style="margin-top:10px" id="copyMail">Adresse kopieren</button>
+        </p>
+        <div class="divider"></div>
+        <p style="margin-top:12px">
+          Bitte freundlich & respektvoll 🙏 – Hate wird ignoriert/gelöscht.
+          Lasst uns lieb zueinander sein 💖
+        </p>
+      </div>
+
+      <div class="card section">
+        <h3>Footer-Links (schnell editierbar) 🔗</h3>
+        <p>
+          Du kannst unten in der Datei ganz leicht deine echten Links eintragen.
+          Aktuell sind Twitch/Instagram/YouTube als Platzhalter gesetzt.
+        </p>
+        <div class="divider"></div>
+        <p style="margin-top:12px">
+          Tipp: Wenn du willst, kann ich dir auch eine Version bauen mit:
+          <br/>• Live-Status-Widget (extern)
+          <br/>• Discord-Invite
+          <br/>• FAQ & Panel-Seiten
+        </p>
+      </div>
+    </section>
+
+    <footer class="card">
+      <div>© <span id="year"></span> Euer Baron 〽️ · A.K.A. UNISKILLZ 👑 · <span style="color:var(--muted)">Chill, cool down, trink ’nen Tee 🍵 & enjoy Bro 👌</span></div>
+      <div class="footlinks" style="margin-top:12px">
+        <a href="#top">⬆️ Nach oben</a>
+        <a href="#support">💜 Support</a>
+        <a href="#games">🎮 Games</a>
+        <a href="#wishlist">⚙️ Studio</a>
+        <a href="https://ehhmmy.wixsite.com/baron-m" target="_blank" rel="noopener">🌐 Wix</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Smooth scroll (native when supported)
+    document.documentElement.style.scrollBehavior = 'smooth';
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Copy helpers
+    const copyText = async (txt) => {
+      try {
+        await navigator.clipboard.writeText(txt);
+        toast('Kopiert ✅');
+      } catch (e) {
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = txt;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        toast('Kopiert ✅');
+      }
+    };
+
+    document.getElementById('copyMail').addEventListener('click', () => {
+      copyText('official.uniskillz@gmail.com');
+    });
+
+    document.getElementById('copyWishlist').addEventListener('click', () => {
+      const items = [
+        'Mikrofon + Interface',
+        'Beleuchtung (Key/Fill/RGB)',
+        'Kamera / Capture',
+        'Stream Deck / Controller',
+        'Akustik (Panels/Absorber)',
+        'Musik/Produktion (MIDI Keyboard, Plugins)'
+      ].join('\n');
+      copyText(items);
+    });
+
+    // Tiny toast
+    const toast = (msg) => {
+      const t = document.createElement('div');
+      t.textContent = msg;
+      t.style.position = 'fixed';
+      t.style.left = '50%';
+      t.style.bottom = '18px';
+      t.style.transform = 'translateX(-50%)';
+      t.style.background = 'rgba(31,31,35,.92)';
+      t.style.border = '1px solid rgba(145,70,255,.35)';
+      t.style.color = 'white';
+      t.style.padding = '10px 12px';
+      t.style.borderRadius = '14px';
+      t.style.boxShadow = '0 16px 34px rgba(0,0,0,.35)';
+      t.style.zIndex = '9999';
+      t.style.fontSize = '13px';
+      document.body.appendChild(t);
+      setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity .25s ease'; }, 900);
+      setTimeout(() => t.remove(), 1250);
+    };
+  </script>
+</body>
+</html>
